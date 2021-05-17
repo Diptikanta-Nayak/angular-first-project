@@ -48,14 +48,15 @@ export class CreateuserComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   get f() { return this.registerForm.controls }
+ 
+  //
   onSubmit() {
 
     this.registerForm.markAllAsTouched();
     if (this.registerForm.valid) {
-      console.log('registerForm', this.registerForm.value);
       let userlist = JSON.parse(localStorage.getItem('userlist'));
-      console.log('USER LIST', userlist);
       //if list is null then is not push anything  set is blank array
       if (userlist === null) {
         userlist = [];

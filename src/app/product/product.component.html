@@ -1,17 +1,99 @@
-<div class="user">
-<form class="col-md-4" >
-    <div>
-        <h1>Product Registation Page</h1>
-    </div>
-    <div class="form-group"  >
-        <label for="productName">Product Name</label>
-        <input type="text" formControlName="productName" class="form-control"  >
-       
-    </div>
-    <div>
-        <label for="procuctDescription">Product Description</label>
-        <textArea   rows="5" cols="60" required></textArea>
-    </div>
+<div class="container ">
+    <form [formGroup]="productForm">
+        <div class="row justify-content-center  ">
+            <div class="card col-md-4 ">
+                <div class="card-heading text-center">
+                    <h1>Product Page</h1>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="productName">Product Name </label>
+                        <input type="text" id="productName" formControlName="productName" class="form-control"
+                            [ngClass]="{ 'is-invalid':  f.productName.invalid && (f.productName.touched || f.productName.dirty)}">
+                        <div *ngIf=" f.productName.invalid && (f.productName.touched || f.productName.dirty)"
+                            class="text-danger">
+                            <div *ngIf="f.productName.errors.required">ProductName is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="productDescription">Product Description</label>
+                        <textarea class="form-control" formControlName="productDescription" id="productDescription" rows="3"
+                            [ngClass]="{ 'is-invalid':  f.productDescription.invalid && (f.productDescription.touched || f.productDescription.dirty)}"></textarea>
+                        <div *ngIf=" f.productDescription.invalid && (f.productDescription.touched || f.productDescription.dirty)" >
+                            <div *ngIf="f.productDescription.errors.required">Product Description is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="productCategory">Product Catagory</label>
+                        <select class="form-control" id="productCategory" formControlName="productCategory"
+                            [ngClass]="{ 'is-invalid':  f.productCategory.invalid && (f.productCategory.touched || f.productCategory.dirty) }"
+                            class="form-control">
+                            <option>Choose product</option>
+                            <option>puma</option>
+                            <option>nike</option>
+                            <option>adddas</option>
+                        </select>
+                        <div *ngIf=" f.productCategory.invalid && (f.productCategory.touched || f.productCategory.dirty)"
+                            class="text-danger">
+                            <div *ngIf="f.productCategory.errors.required">product Category is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateOfExpiry">Date Of Expiry</label>
+                        <input type="date" id="dateOfExpiry" name="dateOfExpiry" class="form-control" formControlName="dateOfExpiry"
+                            [ngClass]="{ 'is-invalid':  f.dateOfExpiry.invalid && (f.dateOfExpiry.touched || f.dateOfExpiry.dirty) }">
+                        <div *ngIf=" f.dateOfExpiry.invalid && (f.dateOfExpiry.touched || f.dateOfExpiry.dirty)" class="text-danger">
+                            <div *ngIf="f.dateOfExpiry.errors.required">Date Of Expirye is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="productPrice">Product Price</label>
+                        <input type="text" id="productPrice" formControlName="productPrice" class="form-control"
+                        [ngClass]="{ 'is-invalid':  f.productPrice.invalid && (f.productPrice.touched || f.productPrice.dirty) }">
+                        
+                        <div *ngIf=" f.productPrice.invalid && (f.productPrice.touched || f.productPrice.dirty)" class="text-danger">
+                            <div *ngIf="f.productPrice.errors.required">Enter only number.</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="productIsAvalable">product Is Avalable:</label>
+                        <div>
+                            <input id="Yes" type="radio" value="Yes" name="productIsAvalable"
+                                formControlName="productIsAvalable">
+                            <label for="Yes">Yes</label>
+                        </div>
+                        <div>
+                            <input id="No" type="radio" value="No" name="productIsAvalable"
+                                formControlName="productIsAvalable">
+                            <label for="No">No</label>
+                        </div>
 
-</form>
+                        <div *ngIf=" f.productIsAvalable.invalid && (f.productIsAvalable.touched || f.productIsAvalable.dirty)"
+                            class="text-danger">
+                            <div *ngIf="f.productIsAvalable.errors.required">productIsAvalable is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group form-check">
+                        
+                        <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input"
+                            [ngClass]="{ 'is-invalid':  f.acceptTerms.invalid && (f.acceptTerms.touched || f.acceptTerms.dirty) }" />
+                        <label for="acceptTerms" >Accept Terms & Conditions</label>
+                        <div *ngIf=" f.acceptTerms.invalid && (f.acceptTerms.touched || f.acceptTerms.dirty)"
+                            class="text-danger">
+                            <div *ngIf="f.acceptTerms.errors.required">Cheackbox is required</div>
+                        </div>
+
+                    </div>
+                    <br><br>
+                    <div>
+                        <button class="btn btn-primary text-center w-100" (click)="onSubmit()">submit</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </form>
 </div>

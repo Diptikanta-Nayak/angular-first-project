@@ -3,8 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CreateuserComponent } from './createuser/createuser.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
+
 
 
 
@@ -13,7 +14,7 @@ import { ProductComponent } from './product/product.component';
     AppComponent,
     CreateuserComponent,
     ProductComponent,
-   
+ 
   
  
   ],
