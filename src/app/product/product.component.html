@@ -17,9 +17,10 @@
                     </div>
                     <div class="form-group">
                         <label for="productDescription">Product Description</label>
-                        <textarea class="form-control" formControlName="productDescription" id="productDescription" rows="3"
+                        <textarea class="form-control" formControlName="productDescription" id="productDescription"
+                            rows="3"
                             [ngClass]="{ 'is-invalid':  f.productDescription.invalid && (f.productDescription.touched || f.productDescription.dirty)}"></textarea>
-                        <div *ngIf=" f.productDescription.invalid && (f.productDescription.touched || f.productDescription.dirty)" >
+                        <div *ngIf=" f.productDescription.invalid && (f.productDescription.touched || f.productDescription.dirty)">
                             <div *ngIf="f.productDescription.errors.required">Product Description is required</div>
                         </div>
                     </div>
@@ -40,18 +41,20 @@
                     </div>
                     <div class="form-group">
                         <label for="dateOfExpiry">Date Of Expiry</label>
-                        <input type="date" id="dateOfExpiry" name="dateOfExpiry" class="form-control" formControlName="dateOfExpiry"
+                        <input type="date" id="dateOfExpiry" name="dateOfExpiry" class="form-control"
+                            formControlName="dateOfExpiry"
                             [ngClass]="{ 'is-invalid':  f.dateOfExpiry.invalid && (f.dateOfExpiry.touched || f.dateOfExpiry.dirty) }">
-                        <div *ngIf=" f.dateOfExpiry.invalid && (f.dateOfExpiry.touched || f.dateOfExpiry.dirty)" class="text-danger">
+                        <div *ngIf=" f.dateOfExpiry.invalid && (f.dateOfExpiry.touched || f.dateOfExpiry.dirty)"
+                            class="text-danger">
                             <div *ngIf="f.dateOfExpiry.errors.required">Date Of Expirye is required</div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="productPrice">Product Price</label>
                         <input type="text" id="productPrice" formControlName="productPrice" class="form-control"
-                        [ngClass]="{ 'is-invalid':  f.productPrice.invalid && (f.productPrice.touched || f.productPrice.dirty) }">
-                        
-                        <div *ngIf=" f.productPrice.invalid && (f.productPrice.touched || f.productPrice.dirty)" class="text-danger">
+                            [ngClass]="{ 'is-invalid':  f.productPrice.invalid && (f.productPrice.touched || f.productPrice.dirty) }">
+                        <div *ngIf=" f.productPrice.invalid && (f.productPrice.touched || f.productPrice.dirty)"
+                            class="text-danger">
                             <div *ngIf="f.productPrice.errors.required">Enter only number.</div>
                         </div>
                     </div>
@@ -67,33 +70,27 @@
                                 formControlName="productIsAvalable">
                             <label for="No">No</label>
                         </div>
-
                         <div *ngIf=" f.productIsAvalable.invalid && (f.productIsAvalable.touched || f.productIsAvalable.dirty)"
                             class="text-danger">
                             <div *ngIf="f.productIsAvalable.errors.required">productIsAvalable is required</div>
                         </div>
                     </div>
-
                     <div class="form-group form-check">
-                        
                         <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input"
                             [ngClass]="{ 'is-invalid':  f.acceptTerms.invalid && (f.acceptTerms.touched || f.acceptTerms.dirty) }" />
-                        <label for="acceptTerms" >Accept Terms & Conditions</label>
+                        <label for="acceptTerms">Accept Terms & Conditions</label>
                         <div *ngIf=" f.acceptTerms.invalid && (f.acceptTerms.touched || f.acceptTerms.dirty)"
                             class="text-danger">
                             <div *ngIf="f.acceptTerms.errors.required">Cheackbox is required</div>
                         </div>
-
                     </div>
                     <br><br>
                     <div>
                         <button class="btn btn-primary text-center w-100" (click)="onSubmit()">submit</button>
                     </div>
-
+                    
                 </div>
-
             </div>
-
         </div>
     </form>
 </div>

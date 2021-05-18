@@ -6,6 +6,9 @@ import { CreateuserComponent } from './createuser/createuser.component';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
 
+import { UserlistsComponent } from './userlists/userlists.component';
+import { ProductlistComponent } from './productlist/productlist.component';
+
 
 
 
@@ -14,6 +17,9 @@ import { ProductComponent } from './product/product.component';
     AppComponent,
     CreateuserComponent,
     ProductComponent,
+  
+    UserlistsComponent,
+    ProductlistComponent,
  
   
  

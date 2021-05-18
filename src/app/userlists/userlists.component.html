@@ -1,0 +1,29 @@
+<div class="text-right">
+    <button class="btn btn-warning" routerLink="/createuser">Add user</button>
+    </div>
+<table class="table table-striped table-bordered ">
+    <thead>
+        <tr>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Password</th>
+            <th>ConformPassword</th>
+            <th>PhoneNo</th>
+            <th>Email</th>
+            <th>City</th>
+            <th>More</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of data">
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.password }}</td>
+        <td>{{ user.conformPassword }}</td>
+        <td>{{ user.phoneNo }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.city }}</td>
+        </tr> 
+   
+    </tbody>
+</table>

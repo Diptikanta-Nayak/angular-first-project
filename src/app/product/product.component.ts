@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl,Validators,FormBuilder,FormArray } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -7,7 +8,6 @@ import { FormGroup,FormControl,Validators,FormBuilder,FormArray } from '@angular
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-
 productForm=new FormGroup({
   productName: new FormControl('', Validators.required),
   productDescription: new FormControl('',[ Validators.required,Validators.minLength(30)]),
@@ -16,14 +16,16 @@ productForm=new FormGroup({
   productPrice:new FormControl ('', [Validators.required, Validators.pattern("^[0-9]*$")]),
   productIsAvalable: new FormControl('', Validators.required),
   acceptTerms: new FormControl('', Validators.required),
-  countryAvalable : new FormArray([])
+ 
 });
-availableCities = [];
 
-  constructor(private fb: FormBuilder) { }
+
+  constructor(private fb: FormBuilder,
+    private router :Router) {}
+  
 
   ngOnInit(): void {
-    this.availableCities = ['Gujarat','Goa','Odisha' ,'Karala','West Bengal' ];
+    
   }
   get f() { return this.productForm.controls }
   onSubmit(){
@@ -35,8 +37,9 @@ availableCities = [];
         productlist = [];
       }
       productlist.push(this.productForm.value);
-      localStorage.setItem('userlist', JSON.stringify(productlist));
+      localStorage.setItem('productlist', JSON.stringify(productlist));
       this.productForm.reset();
+      this.router.navigate(['/productlist']);
     }
     else {
       this.productForm.markAllAsTouched();

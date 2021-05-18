@@ -1,0 +1,27 @@
+<div class="text-right">
+    <button class="btn btn-warning " routerLink="/product">Add product</button>
+</div>
+<table class="table table-striped table-bordered text-center">
+    <thead>
+        <tr>
+            <th>productName</th>
+            <th>productDescription</th>
+            <th>productCategory</th>
+            <th>dateOfExpiry</th>
+            <th>productPrice</th>
+            <th>productIsAvalable</th>
+            <th>acceptTerms</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of data">
+            <td>{{ product.productName }}</td>
+            <td>{{ product.productDescription }}</td>
+            <td>{{ product.productCategory }}</td>
+            <td>{{ product.dateOfExpiry }}</td>
+            <td>{{ product.productPrice }}</td>
+            <td>{{ product.productIsAvalable }}</td>
+            <td>{{ product.acceptTerms }}</td>
+        </tr>
+    </tbody>
+</table>
