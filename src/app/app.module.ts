@@ -8,6 +8,7 @@ import { ProductComponent } from './product/product.component';
 
 import { UserlistsComponent } from './userlists/userlists.component';
 import { ProductlistComponent } from './productlist/productlist.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
@@ -20,6 +21,7 @@ import { ProductlistComponent } from './productlist/productlist.component';
   
     UserlistsComponent,
     ProductlistComponent,
+    PageNotFoundComponent,
  
   
  
@@ -27,7 +29,8 @@ import { ProductlistComponent } from './productlist/productlist.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
