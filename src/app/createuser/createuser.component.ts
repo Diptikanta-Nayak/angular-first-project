@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router ,ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-createuser',
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./createuser.component.scss']
 })
 export class CreateuserComponent implements OnInit {
-
+id;
   registerForm = this.fb.group({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
@@ -38,11 +38,22 @@ export class CreateuserComponent implements OnInit {
       }
     }
   }
-
-
-  constructor(private fb: FormBuilder, private router: Router) { }
+  
+  userlists = [];
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    
+    this.userlists = JSON.parse(localStorage.getItem('userlist'));
+    this.id = this.route.snapshot.params['id'];
+    console.log(this.userlists)
+    if (this.id) {
+      const createuser = this.userlists[this.id];
+      this.registerForm.patchValue(createuser);
+      
+
+    }
+    
   }
 
   get f() { return this.registerForm.controls }
@@ -50,13 +61,18 @@ export class CreateuserComponent implements OnInit {
 
     this.registerForm.markAllAsTouched();
     if (this.registerForm.valid) {
-      let userlist = JSON.parse(localStorage.getItem('userlist'));
       //if list is null then is not push anything  set is blank array
-      if (userlist === null) {
-        userlist = [];
+      if (this.userlists === null) {
+        this.userlists = [];
       }
-      userlist.push(this.registerForm.value);
-      localStorage.setItem('userlist', JSON.stringify(userlist));
+
+      if(this.id) {
+        this.userlists[this.id] = this.registerForm.value;
+      } 
+      else {
+      this.userlists.push(this.registerForm.value);
+      }
+      localStorage.setItem('userlist', JSON.stringify(this.userlists ));
       this.registerForm.reset();
       //if click the button show the table (router)
       this.router.navigate(['/userlists']);

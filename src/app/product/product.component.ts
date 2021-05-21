@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 
 export class ProductComponent implements OnInit {
-
+  id;
   productForm = new FormGroup({
     productName: new FormControl('', Validators.required),
     productDescription: new FormControl('', [Validators.required, Validators.minLength(30)]),
@@ -19,21 +19,43 @@ export class ProductComponent implements OnInit {
     productIsAvalable: new FormControl('', Validators.required),
     acceptTerms: new FormControl('', Validators.required),
     quantities: this.fb.array([]), //declare formArray
-  });
 
-  constructor(private fb: FormBuilder,private router: Router) { }
+  });
+  // edit product declare
+  productlist = [];
+
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    //store edit
+    this.productlist = JSON.parse(localStorage.getItem('productlist'));
+    this.id = this.route.snapshot.params['id'];
+    if (this.id) {
+      const product = this.productlist[this.id];
+      this.productForm.patchValue(product);
+
+      if (product.quantities?.length > 0) {
+        for (let index = 0; index < product.quantities?.length; index++) {
+          this.addQuantity();
+        }
+      }
+
+    }
+    // console.log(this.id)
   }
 
   /**
-     * Get archived jobs from API.
+     * methid of formArray
      *
      */
   quantities(): FormArray {
     return this.productForm.get("quantities") as FormArray
   }
 
+  /**
+    * formControlName declare qty,price
+    *
+    */
   newQuantity(): FormGroup {
     return this.fb.group({
       qty: '',
@@ -63,20 +85,27 @@ export class ProductComponent implements OnInit {
   get f() { return this.productForm.controls }
 
   onSubmit() {
+    
     this.productForm.markAllAsTouched();
-
     if (this.productForm.valid) {
-      let productlist = JSON.parse(localStorage.getItem('productlist'));
 
-      if (productlist === null) {
-        productlist = [];
+      if (this.productlist === null) {
+        this.productlist = [];
+      }
+//edit in same page
+      if (this.id) {
+        this.productlist[this.id] = this.productForm.value;
+      } else {
+        this.productlist.push(this.productForm.value);
       }
 
-      productlist.push(this.productForm.value);
-      localStorage.setItem('productlist', JSON.stringify(productlist));
+      //local storage
+      
+      localStorage.setItem('productlist', JSON.stringify(this.productlist));
+      //Redirect back to leastling
       this.router.navigate(['/productlist']);
     }
-    
+
     else {
       this.productForm.markAllAsTouched();
     }

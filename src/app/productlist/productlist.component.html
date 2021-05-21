@@ -13,10 +13,11 @@
             <th>productIsAvalable</th>
             <th>acceptTerms</th>
             <th>product Quantity</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let product of data">
+        <tr *ngFor="let product of data ; index as i">
             <td>{{ product.productName }}</td>
             <td>{{ product.productDescription }}</td>
             <td>{{ product.productCategory }}</td>
@@ -24,16 +25,21 @@
             <td>{{ product.productPrice }}</td>
             <td>{{ product.productIsAvalable }}</td>
             <td>{{ product.acceptTerms }}</td>
+
             <!-- quaenty price define  inside the table -->
             <td>
                 <div *ngIf="product.quantities?.length > 0">
-                   <span> Qty- Price</span>
+                    <span> Qty- Price</span>
                     <div *ngFor="let quantity of product.quantities">
                         {{quantity.qty}} - {{quantity.price}}
                     </div>
-                    
+
                 </div>
             </td>
+            <td>
+                <button routerLink="/product-edit/{{i}}" class="btn btn-primary">Edit</button>
+            </td>
+
         </tr>
     </tbody>
 </table>
