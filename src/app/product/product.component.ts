@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ProductserviveService } from '../productservive.service';
 
 @Component({
   selector: 'app-product',
@@ -9,7 +10,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 
 export class ProductComponent implements OnInit {
+
+  //index of product array to find the data for edit time
   id;
+
   productForm = new FormGroup({
     productName: new FormControl('', Validators.required),
     productDescription: new FormControl('', [Validators.required, Validators.minLength(30)]),
@@ -19,41 +23,46 @@ export class ProductComponent implements OnInit {
     productIsAvalable: new FormControl('', Validators.required),
     acceptTerms: new FormControl('', Validators.required),
     quantities: this.fb.array([]), //declare formArray
-
   });
-  // edit product declare
+
+  // store product list data from localstorage
   productlist = [];
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private service: ProductserviveService) {
+  }
 
   ngOnInit(): void {
-    //store edit
-    this.productlist = JSON.parse(localStorage.getItem('productlist'));
+
+    // get the data in service
+    this.productlist = this.service.getproductitem();
+
+    // get id from url
     this.id = this.route.snapshot.params['id'];
+
     if (this.id) {
       const product = this.productlist[this.id];
       this.productForm.patchValue(product);
 
+      //check the quantities of porduct is more than 0 then we have to add that from to our formarray
       if (product.quantities?.length > 0) {
+
         for (let index = 0; index < product.quantities?.length; index++) {
           this.addQuantity();
         }
       }
-
     }
-    // console.log(this.id)
   }
 
   /**
-     * methid of formArray
-     *
-     */
+    * return form array for product quantity
+    *
+    */
   quantities(): FormArray {
     return this.productForm.get("quantities") as FormArray
   }
 
   /**
-    * formControlName declare qty,price
+    * return new form group for new quantity
     *
     */
   newQuantity(): FormGroup {
@@ -62,8 +71,9 @@ export class ProductComponent implements OnInit {
       price: '',
     })
   }
+
   /**
-   * Add formarray.
+   * Add new quantity form into quantities form array.
    *
    */
   addQuantity() {
@@ -71,7 +81,7 @@ export class ProductComponent implements OnInit {
   }
 
   /**
-   * Remove Quantity.
+   * Remove Quantity from our quantity form array.
    *
    */
   removeQuantity(i: number) {
@@ -79,30 +89,31 @@ export class ProductComponent implements OnInit {
   }
 
   /**
-  * contorls.
+  * return our form controls.
   *
   */
   get f() { return this.productForm.controls }
 
   onSubmit() {
-    
-    this.productForm.markAllAsTouched();
+
     if (this.productForm.valid) {
 
+      //array value can not null
       if (this.productlist === null) {
         this.productlist = [];
       }
-//edit in same page
+
+      //edit in same page
       if (this.id) {
         this.productlist[this.id] = this.productForm.value;
       } else {
         this.productlist.push(this.productForm.value);
       }
 
-      //local storage
-      
-      localStorage.setItem('productlist', JSON.stringify(this.productlist));
-      //Redirect back to leastling
+      // set the data in service
+      this.service.setproductitem(this.productlist);
+
+      //if click the button show the table (router)
       this.router.navigate(['/productlist']);
     }
 
@@ -111,3 +122,4 @@ export class ProductComponent implements OnInit {
     }
   }
 }
+

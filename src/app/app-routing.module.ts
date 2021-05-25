@@ -13,11 +13,10 @@ const routes: Routes = [
   { path: 'product', component: ProductComponent },
   { path: 'userlists', component: UserlistsComponent },
   { path: 'productlist', component: ProductlistComponent },
-  {path: 'product-edit/:id', component: ProductComponent },
+  { path: 'product-edit/:id', component: ProductComponent },
   { path: 'page-not-found', component: PageNotFoundComponent },
   { path: '', redirectTo: '/userlists', pathMatch: 'full' },
-  { path: "**", redirectTo: '/page-not-found'},
-
+  { path: "**", redirectTo: '/page-not-found' },
 ];
 
 @NgModule({

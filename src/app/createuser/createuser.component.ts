@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Router ,ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UserserviceService } from '../userservice.service';
 
 @Component({
   selector: 'app-createuser',
@@ -8,7 +9,10 @@ import { Router ,ActivatedRoute} from '@angular/router';
   styleUrls: ['./createuser.component.scss']
 })
 export class CreateuserComponent implements OnInit {
-id;
+
+  //index of createuser array to find the data for edit time
+  id;
+
   registerForm = this.fb.group({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
@@ -19,9 +23,12 @@ id;
     city: new FormControl('', Validators.required),
 
 
-  }, {
+  },
+   {
     validators: this.MustMatch('password', 'conformPassword')
   });
+
+  //if  you input the password must be same type of conformpassword
   MustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
@@ -30,7 +37,8 @@ id;
         // return if another validator has already found an error on the matchingControl
         return;
       }
-      // set error on matchingControl if validation fails
+
+      // set error on matching Control if validation fails
       if (control.value !== matchingControl.value) {
         matchingControl.setErrors({ mustMatch: true });
       } else {
@@ -38,49 +46,58 @@ id;
       }
     }
   }
-  
-  userlists = [];
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
+
+// store user list data from localstorage
+  userlist = [];
+
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,private service:UserserviceService) { }
 
   ngOnInit(): void {
-    
-    this.userlists = JSON.parse(localStorage.getItem('userlist'));
-    this.id = this.route.snapshot.params['id'];
-    console.log(this.userlists)
-    if (this.id) {
-      const createuser = this.userlists[this.id];
-      this.registerForm.patchValue(createuser);
-      
 
+    //store edit
+    this.userlist = this.service.getuseritem();
+
+    // get id from url
+    this.id = this.route.snapshot.params['id'];
+
+    //edit assign the name new value
+    if (this.id) {
+      const createuser = this.userlist[this.id];
+      this.registerForm.patchValue(createuser);
     }
-    
   }
 
+  //return our form controls.
   get f() { return this.registerForm.controls }
+
   onSubmit() {
 
-    this.registerForm.markAllAsTouched();
     if (this.registerForm.valid) {
+
       //if list is null then is not push anything  set is blank array
-      if (this.userlists === null) {
-        this.userlists = [];
+      if (this.userlist === null) {
+        this.userlist = [];
       }
 
-      if(this.id) {
-        this.userlists[this.id] = this.registerForm.value;
-      } 
-      else {
-      this.userlists.push(this.registerForm.value);
+      // if you change some data edit the same page
+      if (this.id) {
+        this.userlist[this.id] = this.registerForm.value;
       }
-      localStorage.setItem('userlist', JSON.stringify(this.userlists ));
+      else {
+        this.userlist.push(this.registerForm.value);
+      }
+
+      //set the data form localstorage
+      this.service.setuseritem(this.userlist);
+      
+      //reset data 
       this.registerForm.reset();
+
       //if click the button show the table (router)
       this.router.navigate(['/userlists']);
     }
     else {
       this.registerForm.markAllAsTouched();
     }
-
   }
-
 }

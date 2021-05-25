@@ -20,7 +20,8 @@
                         <textarea class="form-control" formControlName="productDescription" id="productDescription"
                             rows="3"
                             [ngClass]="{ 'is-invalid':  f.productDescription.invalid && (f.productDescription.touched || f.productDescription.dirty)}"></textarea>
-                        <div *ngIf=" f.productDescription.invalid && (f.productDescription.touched || f.productDescription.dirty)">
+                        <div
+                            *ngIf=" f.productDescription.invalid && (f.productDescription.touched || f.productDescription.dirty)">
                             <div *ngIf="f.productDescription.errors.required">Product Description is required</div>
                         </div>
                     </div>
@@ -84,32 +85,33 @@
                             <div *ngIf="f.acceptTerms.errors.required">Cheackbox is required</div>
                         </div>
                     </div>
-            <!-- formArray  start-->
+                    <!-- formArray  start-->
                     <table class="table table-bordered" formArrayName="quantities">
                         <tr>
-                          <th colspan="2">Add Multiple Quantity:</th>
-                          <th width="150px"><button type="button" (click)="addQuantity()" class="btn btn-primary">Add More</button></th>
+                            <th colspan="2">Add Multiple Quantity:</th>
+                            <th width="150px"><button type="button" (click)="addQuantity()" class="btn btn-primary">Add
+                                    More</button></th>
                         </tr>
                         <tr *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i">
-                          <td>
-                              Quantity :
-                              <input type="text" formControlName="qty" class="form-control">
-                          </td>
-                          <td>
-                              Price:
-                              <input type="text" formControlName="price" class="form-control">
-                          </td>
-                          <td>
-                              <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
-                          </td>
+                            <td>
+                                Quantity :
+                                <input type="text" formControlName="qty" class="form-control">
+                            </td>
+                            <td>
+                                Price:
+                                <input type="text" formControlName="price" class="form-control">
+                            </td>
+                            <td>
+                                <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
+                            </td>
                         </tr>
-                      </table>
-                    
+                    </table>
+
                     <br><br>
                     <div>
                         <button class="btn btn-primary text-center w-100" (click)="onSubmit()">submit</button>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
