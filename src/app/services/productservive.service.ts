@@ -8,12 +8,12 @@ export class ProductserviveService {
   constructor() {
   }
 
-  //get function service
+  // function that return user list stored in localstorage
   getproductitem() {
-    return JSON.parse(localStorage.getItem('productlist'));
+    return JSON.parse(localStorage.getItem('productlist')) || [];
   }
 
-  //set function in service
+//function store user list in localstorage
   setproductitem(productlist) {
     localStorage.setItem('productlist', JSON.stringify(productlist));
   }

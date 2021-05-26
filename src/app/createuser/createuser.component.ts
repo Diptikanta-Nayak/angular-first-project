@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserserviceService } from '../userservice.service';
+import { UserserviceService } from '../services/userservice.service';
 
 @Component({
   selector: 'app-createuser',
@@ -94,7 +94,7 @@ export class CreateuserComponent implements OnInit {
       this.registerForm.reset();
 
       //if click the button show the table (router)
-      this.router.navigate(['/userlists']);
+      this.router.navigate(['/loginpage']);
     }
     else {
       this.registerForm.markAllAsTouched();

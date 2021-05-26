@@ -1,8 +1,9 @@
-<div class="text-right">
+<!-- <div class="text-right">
     <button class="btn btn-warning" routerLink="/createuser">Add user</button>
     </div>
-    <br><br>
-<table class="table table-striped table-bordered" *ngIf = "data.length>0; else noDataTemplate">
+    <br><br> -->
+
+<table class="table table-striped table-bordered" *ngIf = "userdata.length>0; else noDataTemplate">
     <thead>
         <tr>
             <th>FirstName</th>
@@ -16,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let user of data ; index as i">
+        <tr *ngFor="let user of userdata ; index as i">
         <td>{{ user.firstName }}</td>
         <td>{{ user.lastName }}</td>
         <td>{{ user.password }}</td>

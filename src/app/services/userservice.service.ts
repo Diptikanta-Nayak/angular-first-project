@@ -7,12 +7,12 @@ export class UserserviceService {
 
   constructor() { }
 
-//service function get  return in localstorage
+// function that return user list stored in localstorage
   getuseritem() {
-    return JSON.parse(localStorage.getItem('userlist'));
+    return JSON.parse(localStorage.getItem('userlist')) || [];
   }
 
-  //service function set  in localstorage
+  //function store user list in localstorage
   setuseritem(userlist) {
     localStorage.setItem('userlist', JSON.stringify(userlist));
   }

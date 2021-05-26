@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductserviveService } from '../productservive.service';
-import { UserserviceService } from '../userservice.service';
+import { UserserviceService } from '../services/userservice.service';
 
 @Component({
   selector: 'app-userlists',
@@ -11,12 +10,12 @@ import { UserserviceService } from '../userservice.service';
 export class UserlistsComponent implements OnInit {
 
   //index of createuser array to find the data for edit time
-  data;
+  userdata;
 
   constructor(private service:UserserviceService) {
 
-    // get the data form service
-    this.data = this.service.getuseritem();
+    // get user list in localstorage form service
+    this.userdata = this.service.getuseritem();
   }
 
   ngOnInit(): void {
@@ -26,10 +25,10 @@ export class UserlistsComponent implements OnInit {
   deleteitem(i) {
 
     if (confirm("are you sure !")) {
-      this.data.splice(i, 1);
-      
-      //set data form service
-      this.service.setuseritem(this.data);
+      this.userdata.splice(i, 1);
+
+      //set user list in localstorage form service
+      this.service.setuseritem(this.userdata);
     }
 
   }

@@ -34,8 +34,7 @@
             <div *ngIf=" f.conformPassword.invalid && (f.conformPassword.touched || f.conformPassword.dirty)"
                 class="text-danger">
                 <div *ngIf="f.conformPassword.errors.required">ConformPassword is required</div>
-                <div *ngIf="f.conformPassword.errors.confirmedValidator">Password and Confirm Password must be match.
-                </div>
+                <div *ngIf="f.conformPassword.errors.mustMatch">Passwords must match</div>
             </div>
         </div>
         <div class="form-group">
@@ -44,7 +43,6 @@
                 [ngClass]="{ 'is-invalid':  f.phoneNo.invalid && (f.phoneNo.touched || f.phoneNo.dirty)}">
             <div *ngIf=" f.phoneNo.invalid && (f.phoneNo.touched || f.phoneNo.dirty)" class="text-danger">
                 <div *ngIf="f.phoneNo.errors.required">PhoneNo is required</div>
-
                 <div *ngIf="f.phoneNo.errors.pattern">Enter 10 digit Mobile Number.</div>
             </div>
         </div>
@@ -54,7 +52,7 @@
                 [ngClass]="{ 'is-invalid':  f.email.invalid && (f.email.touched || f.email.dirty) }">
             <div *ngIf=" f.email.invalid && (f.email.touched || f.email.dirty)" class="text-danger">
                 <div *ngIf="f.email.errors.required">Email is required</div>
-                <div *ngIf="f.email.errors.pattern">ex-d@gmaiul.com</div>
+                <div *ngIf="f.email.errors.pattern">Please enter valid email address</div>
             </div>
         </div>
         <div class="form-group">

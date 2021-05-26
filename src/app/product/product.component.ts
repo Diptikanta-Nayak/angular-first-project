@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ProductserviveService } from '../productservive.service';
+import { ProductserviveService } from '../services/productservive.service';
 
 @Component({
   selector: 'app-product',
