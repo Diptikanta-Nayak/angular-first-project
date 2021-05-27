@@ -1,8 +1,9 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">   
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="this.authService.isUserLoggedIn()" >   
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-item nav-link active" href="#" routerLink="/userlists">UserList</a>
         <a class="nav-item nav-link" href="#" routerLink="/productlist">Product</a>
+        <button class="ntn btn-primary text-right" (click)="authService.logout()">Logout</button>
       </div>
     </div>
   </nav>
