@@ -31,31 +31,27 @@ export class LoginpageComponent implements OnInit {
 
     if (this.loginForm.valid) {
 
+      //get sevice store localstorage
       let userlist = this.service.getuseritem();
-      //console.log(userlist)
 
-      let userLoggedSucess = false;
+      //i email and password is match go to the details and not match show error meassage
+      const userLoggedIndex = userlist.findIndex(user => user.email == this.loginForm.value.email && user.password == this.loginForm.value.password);
 
-      for (let index = 0; index < userlist.length; index++) {
-        const element = userlist[index];
-        if (this.loginForm.value.email == element.email && this.loginForm.value.password == element.password) {
+      if (userLoggedIndex > -1) {
 
-          //set the data in localstorage and value is true set in local storage 
-          this.authService.setUserLoggedIn()
+        this.authService.setUserLoggedIn()
 
-
-          //if click the button show the table
-          this.router.navigate(['/userlists']);
-
-          userLoggedSucess = true;
-          break;
-        }
-      }
-      if (!userLoggedSucess) {
-        alert("email and passwotd in valid");
+        //redirect to userlist page
+        this.router.navigate(['/userlists']);
       }
 
+      else {
+
+        //error meassage email and passord is not match
+        alert('email and password invalid');
+      }
     }
+
     else {
       this.loginForm.markAllAsTouched();
     }
@@ -63,4 +59,5 @@ export class LoginpageComponent implements OnInit {
   }
 
 }
+
 

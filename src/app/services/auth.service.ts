@@ -6,26 +6,27 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  constructor(private router:Router) { }
+  constructor(private router: Router) { }
 
-//return localstorage in user login function
+  //return localstorage in user login function
   isUserLoggedIn() {
     return localStorage.getItem('userLoggedIn') === 'true'
   }
 
   //set localstorage in user login function
-setUserLoggedIn(){
-  localStorage.setItem('userLoggedIn', 'true');
-}
+  setUserLoggedIn() {
+    localStorage.setItem('userLoggedIn', 'true');
+  }
 
-logout(){
+  //logout button
+  logout() {
 
-  //removeitem in localstorage
-  localStorage.removeItem('userLoggedIn');
+    //removeitem in localstorage
+    localStorage.removeItem('userLoggedIn');
 
-  //redirect login page
-  this.router.navigate(['/loginpage']);  
- 
-}
+    //redirect login page
+    this.router.navigate(['/loginpage']);
+
+  }
 
 }
