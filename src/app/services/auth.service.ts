@@ -8,7 +8,7 @@ export class AuthService {
 
   constructor(private router: Router) { }
 
-  //return localstorage in user login function
+  //return  localstorage in user login function
   isUserLoggedIn() {
     return localStorage.getItem('userLoggedIn') === 'true'
   }
@@ -18,10 +18,10 @@ export class AuthService {
     localStorage.setItem('userLoggedIn', 'true');
   }
 
-  //logout button
+ 
   logout() {
 
-    //removeitem in localstorage
+       // remove user from local storage and set current user to null
     localStorage.removeItem('userLoggedIn');
 
     //redirect login page

@@ -28,14 +28,14 @@ export class LoginpageComponent implements OnInit {
 
   loginSubmit() {
 
-
     if (this.loginForm.valid) {
 
-      //get sevice store localstorage
+      //get sevice store in localstorage
       let userlist = this.service.getuseritem();
 
-      //i email and password is match go to the details and not match show error meassage
+      //  email and password is matched then  go to the details and not match show error meassage
       const userLoggedIndex = userlist.findIndex(user => user.email == this.loginForm.value.email && user.password == this.loginForm.value.password);
+
 
       if (userLoggedIndex > -1) {
 

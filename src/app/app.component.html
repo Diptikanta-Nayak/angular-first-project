@@ -3,8 +3,13 @@
       <div class="navbar-nav">
         <a class="nav-item nav-link active" href="#" routerLink="/userlists">UserList</a>
         <a class="nav-item nav-link" href="#" routerLink="/productlist">Product</a>
-        <button class="ntn btn-primary text-right" (click)="authService.logout()">Logout</button>
+        <a class="nav-item nav-link" href="#" routerLink="/customers">customer</a>
+        <a class="nav-item nav-link" href="#" routerLink="/orders">order</a>
+      
       </div>
+    </div>
+    <div>
+      <button class="btn btn-primary text-right" (click)="authService.logout()">Logout</button>
     </div>
   </nav>
   <router-outlet></router-outlet>

@@ -1,3 +1,4 @@
+import { createComponentType } from '@angular/compiler/src/render3/view/compiler';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { from } from 'rxjs';
@@ -20,7 +21,13 @@ const routes: Routes = [
   { path: 'page-not-found', component: PageNotFoundComponent },
   { path: 'loginpage', component: LoginpageComponent },
   { path: '', redirectTo: '/userlists', pathMatch: 'full' },
+ 
+  { path: 'customers', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) },
+
+  { path: 'orders', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule) },
+ 
   { path: "**", redirectTo: '/page-not-found' },
+  
 
 ];
 
