@@ -9,6 +9,8 @@ import { UserlistsComponent } from './userlists/userlists.component';
 import { ProductlistComponent } from './productlist/productlist.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginpageComponent } from './loginpage/loginpage.component';
+import { HomeComponent } from './home/home.component';
+import { CourseComponent } from './course/course.component';
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import { LoginpageComponent } from './loginpage/loginpage.component';
     ProductlistComponent,
     PageNotFoundComponent,
     LoginpageComponent,
+    HomeComponent,
+    CourseComponent,
     
 
 

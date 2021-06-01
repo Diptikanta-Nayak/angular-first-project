@@ -1,0 +1,6 @@
+<h1 #nameRef>This is a home component</h1>
+<div>
+<button (click)="changChildProperty()">Change child property</button> 
+<button (click)="callChildMethod()" >call  child method</button>
+</div>
+<app-course [userName]="childData"></app-course>
